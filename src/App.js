@@ -81,12 +81,19 @@ function App() {
   useEffect(() => {
     if(turns <= 0) {
       setDisabled(true);
-      document.querySelector(".result").innerHTML = "Game Over";
+      document.querySelector(".result").innerHTML = "Aww... You lost. Do you want to try again?";
       document.querySelector(".show-results").classList.add("show");
     }
   }, [turns, disabled])
 
   // show congratulations if player wins
+  useEffect(() => {
+    if(score === 6) {
+      setDisabled(true);
+      document.querySelector(".result").innerHTML = "Congratulations! You won! Do you want to play again?";
+      document.querySelector(".show-results").classList.add("show");
+    }
+  }, [score])
 
   return (
     <div className="App">
@@ -94,6 +101,10 @@ function App() {
         <p>Turns: {turns}</p>
         <h1>Memory Game</h1>
         <p>Score: {score}</p>
+      </div>
+      <div className='show-results'>
+        <p className='result'></p>
+        <button onClick={shuffleCards}>New Game</button>
       </div>
 
       <div className='card-grid'>
@@ -106,10 +117,6 @@ function App() {
             disabled={disabled}
           />
         ))}
-      </div>
-      <div className='show-results'>
-        <p className='result'></p>
-        <button onClick={shuffleCards}>New Game</button>
       </div>
     </div>
   );

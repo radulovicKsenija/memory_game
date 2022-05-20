@@ -41,3 +41,6 @@ img {
 .show-results.show {
   display: block;
 }
+.result {
+  margin-top: 0;
+}
